@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package v1.notification;
+
+option go_package = "github.com/dev-zipida-com/grpc-task-manager/protos/task";
+
+service Notification {
+  rpc Connect(ConnectRequest) returns (ConnectResponse);
+  rpc Publish(PublishRequest) returns (PublishResponse);
+  rpc Subscribe(SubscribeRequest) returns (stream SubscribeResponse);
+}
+
+message Client {
+  string id = 1;
+  string type = 2;
+  string name = 3;
+  int64 time = 4;
+}
+
+message Task {
+  string message = 1;
+  int64 time = 2;
+}
+
+message ConnectRequest {
+  Client client = 1;
+}
+
+message ConnectResponse {
+  bool is_ok = 1;
+  string message = 2;
+  int64 time = 3;
+}
+
+message PublishRequest {
+  string task_id = 1;
+  string message = 2;
+}
+
+message PublishResponse {
+  bool is_ok = 1;
+}
+
+message SubscribeRequest {
+  Client client = 1;
+  string task_id = 2;
+}
+
+message SubscribeResponse {
+  bool is_ok = 1;
+  Task task = 2;
+}
+
