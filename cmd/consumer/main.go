@@ -32,7 +32,7 @@ func main() {
 	// notification
 	cli := pb.NewNotificationClient(conn)
 
-	// connect
+	// bind
 	cli.Connect(context.Background(), &pb.ConnectRequest{Client: client})
 
 	// subscribe
